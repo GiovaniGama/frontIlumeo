@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+    padding: 16px 20px;
+    background-color: var(--dark-background-2);
+    border-radius: 6px;
+
+    &__date{
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    &__time{
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 700;
+    }
+}
