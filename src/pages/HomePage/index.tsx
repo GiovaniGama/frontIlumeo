@@ -1,5 +1,20 @@
+import React, {useContext} from "react"
+import { AuthContext } from "../../contexts/auth"
+import { Button } from "../../components/button"
+
 export function HomePage(){
+    const { logout } = useContext(AuthContext)
+
+    function handleLogout(){
+        logout();
+    }
+
     return(
-        <h1>Home</h1>
+        <div>
+            <Button
+                type="submit"
+                handleOnClick={handleLogout}
+            >Sair</Button>
+        </div>
     )
 }
