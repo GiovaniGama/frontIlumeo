@@ -1,18 +1,20 @@
-import React, {useState} from "react"
+import React, {useState, useContext} from "react"
+import { AuthContext } from "../../contexts/auth"
 import { FormEvent } from "react"
 import { Button } from "../../components/button"
 import { Input } from "../../components/input"
 import Style from "./style.module.scss"
-
-
  
 export function LoginPage(){
+    const { authenticated, login } = useContext(AuthContext)
+
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
 
     function handleSubmit($event: { preventDefault: () => void }){
         $event.preventDefault()
         console.log("submit", {user, password});
+        login(user, password)
     }
 
     return(
@@ -56,4 +58,8 @@ export function LoginPage(){
             </form>
         </div>
     )
+}
+
+function login(user: string, password: string) {
+    throw new Error("Function not implemented.")
 }
