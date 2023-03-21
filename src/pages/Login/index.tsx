@@ -4,9 +4,10 @@ import { FormEvent } from "react"
 import { Button } from "../../components/button"
 import { Input } from "../../components/input"
 import Style from "./style.module.scss"
+import { IProps } from "../../interfaces/props.interface"
  
 export function LoginPage(){
-    const { authenticated, login } = useContext(AuthContext)
+    const { authenticated, login }: IProps | any = useContext(AuthContext)
 
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")

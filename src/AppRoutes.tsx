@@ -13,8 +13,8 @@ import { IProps } from "./interfaces/props.interface"
 
 export function AppRoutes(){
 
-    function Private({children, ...props}: IProps){
-        const { authenticated, loading } = useContext(AuthContext)
+    function Private({children, ...props}: IProps): JSX.Element | any{
+        const { authenticated, loading }: IProps = useContext(AuthContext)
 
         if(loading){
             return (
