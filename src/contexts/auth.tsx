@@ -5,32 +5,31 @@ import { api, LoginUser } from "../services/api"
 
 export const AuthContext = createContext({})
 
-export function AuthProvider({children, ...props}: IProps){
+export function AuthProvider({children}: IProps){
     const navigate = useNavigate()
     const [user, setUser] = useState(null ) 
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         const recoverUser = localStorage.getItem('user')
+        //const token = localStorage.getItem('token')
 
         if(recoverUser){
             setUser(JSON.parse(recoverUser))
+            //api.defaults.headers.Authorization = `Bearer ${token}`
         }
 
         setLoading(false)
     }, [])
 
-    async function login(user: string, password: string){
-        
+    async function login(user: string, password: string){       
         const response = await LoginUser(user, password)
-
-        console.log('login', response.data);
 
         const loggedUser = response.data.user
         const token = response.data.token
 
         localStorage.setItem("user", JSON.stringify(loggedUser))
-        localStorage.setItem("token", JSON.stringify(token))
+        localStorage.setItem("token", token)
 
         api.defaults.headers.Authorization = `Bearer ${token}`
 
@@ -39,8 +38,8 @@ export function AuthProvider({children, ...props}: IProps){
     }
 
     function logout(){
-        localStorage.removeItem('user')
-        localStorage.removeItem('token')
+        localStorage.removeItem("user")
+        localStorage.removeItem("token")
         api.defaults.headers.Authorization = null
         setUser(null)
         navigate("/login")

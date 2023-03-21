@@ -5,4 +5,5 @@ export interface IButton{
     children?: ReactNode
     type: "button" | "submit" | "reset" | undefined
     handleOnClick?: MouseEventHandler<HTMLButtonElement>
+    value: MouseEventHandler<HTMLButtonElement>
 }
