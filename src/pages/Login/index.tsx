@@ -7,7 +7,7 @@ import Style from "./style.module.scss"
 import { IProps } from "../../interfaces/props.interface"
  
 export function LoginPage(){
-    const { authenticated, login }: IProps | any = useContext(AuthContext)
+    const { login }: IProps | any = useContext(AuthContext)
 
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
@@ -59,8 +59,4 @@ export function LoginPage(){
             </form>
         </div>
     )
-}
-
-function login(user: string, password: string) {
-    throw new Error("Function not implemented.")
 }

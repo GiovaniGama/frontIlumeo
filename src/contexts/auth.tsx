@@ -1,7 +1,9 @@
 import React, { createContext, useState, useEffect } from "react"
 import { IProps } from "../interfaces/props.interface"
 import { useNavigate } from "react-router-dom"
-import { api, LoginUser } from "../services/api"
+import { LoginUser } from "../services/api"
+import { http } from "../utils/utils"
+
 
 export const AuthContext = createContext({})
 
@@ -11,12 +13,12 @@ export function AuthProvider({children}: IProps){
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        const recoverUser = localStorage.getItem('user')
-        //const token = localStorage.getItem('token')
+        const recoverUser = window.localStorage.getItem('user')
+        const token = window.localStorage.getItem('token')
 
         if(recoverUser){
             setUser(JSON.parse(recoverUser))
-            //api.defaults.headers.Authorization = `Bearer ${token}`
+            http.defaults.headers.Authorization = `Bearer ${token}`
         }
 
         setLoading(false)
@@ -28,19 +30,19 @@ export function AuthProvider({children}: IProps){
         const loggedUser = response.data.user
         const token = response.data.token
 
-        localStorage.setItem("user", JSON.stringify(loggedUser))
-        localStorage.setItem("token", token)
+        window.localStorage.setItem("user", JSON.stringify(loggedUser))
+        window.localStorage.setItem("token", token)
 
-        api.defaults.headers.Authorization = `Bearer ${token}`
+        http.defaults.headers.Authorization = `Bearer ${token}`
 
         setUser(loggedUser)
         navigate("/")
     }
 
     function logout(){
-        localStorage.removeItem("user")
-        localStorage.removeItem("token")
-        api.defaults.headers.Authorization = null
+        window.localStorage.removeItem("user")
+        window.localStorage.removeItem("token")
+        http.defaults.headers.Authorization = null
         setUser(null)
         navigate("/login")
     }
