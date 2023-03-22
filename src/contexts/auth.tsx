@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { LoginUser } from "../services/api"
 import { http } from "../utils/utils"
 
-
 export const AuthContext = createContext({})
 
 export function AuthProvider({children}: IProps){

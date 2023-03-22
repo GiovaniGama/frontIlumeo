@@ -11,3 +11,7 @@ export const createWorkSchedule = async (date_check_in: Date, date_check_out: Da
 export const getWorkSchedule = async() => {
     return http.get('/schedule')
 }
+
+export const getUser = async() => {
+    return http.get('/profile')
+}

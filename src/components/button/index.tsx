@@ -5,9 +5,9 @@ export function Button(props: IButton){
     return(
         <div className={Style.container}>
             <button 
-                className={Style.container__button} 
-                type={props.type}
-                onClick={props.handleOnClick}>
+                className={Style.container__button}
+                value={props.value}
+                {...props}>
                 <span>
                     {props.children}
                 </span>

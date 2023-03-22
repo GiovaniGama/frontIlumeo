@@ -1,9 +1,7 @@
-import { MouseEventHandler, ReactNode } from "react"
+import { ButtonHTMLAttributes, ReactEventHandler, ReactNode } from "react"
 
 
-export interface IButton{
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement>{
     children?: ReactNode
     type: "button" | "submit" | "reset" | undefined
-    handleOnClick?: MouseEventHandler<HTMLButtonElement>
-    value?: MouseEventHandler<HTMLButtonElement>
 }

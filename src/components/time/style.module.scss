@@ -1,0 +1,27 @@
+.timer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__time{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__span{
+        display: flex;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+        &_minutes{
+            margin-left: 10px;
+        }
+    }
+
+    &__text{
+        display: flex;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--white);
+    }
+}
