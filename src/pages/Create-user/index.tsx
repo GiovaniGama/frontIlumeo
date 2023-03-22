@@ -1,31 +1,41 @@
-import React, {useState, useContext} from "react"
-import { AuthContext } from "../../contexts/auth"
-import { FormEvent } from "react"
+import { useState } from "react"
 import { Button } from "../../components/button"
 import { Input } from "../../components/input"
+import { createUser } from "../../services/api"
 import Style from "./style.module.scss"
-import { IProps } from "../../interfaces/props.interface"
-import { Link } from "react-router-dom"
- 
-export function LoginPage(){
-    const { login }: IProps | any = useContext(AuthContext)
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom"
 
+export function CreateUser(){
+    
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
-
+    const navigate = useNavigate();
+    
     function handleSubmit($event: { preventDefault: () => void }){
         $event.preventDefault()
-        login(user, password)
+        createUser(user, password)
+        .then(() => {
+            navigate("/login")
+        })
+        .catch(() => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Usuário já existe!',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+              })
+        })
     }
 
     return(
-        <div className={Style.login}>
-            <div className={Style.login__title}>
+        <div className={Style.create}>
+            <div className={Style.create__title}>
                 <span>Ponto</span>
                 <h1>Ilumeo</h1>
             </div>
-            <form className={Style.login__form} onSubmit={handleSubmit}>
-                <div className={Style.login__input__user}>
+            <form className={Style.create__form} onSubmit={handleSubmit}>
+                <div className={Style.create__input__user}>
                     <Input 
                         text="Código do usuário" 
                         placeholder="Digite o usuário"
@@ -39,7 +49,7 @@ export function LoginPage(){
                             } 
                         }/>
                 </div>
-                <div className={Style.login__input__password}>
+                <div className={Style.create__input__password}>
                     <Input 
                         text="Senha" 
                         placeholder="Digite a sua senha"
@@ -53,10 +63,7 @@ export function LoginPage(){
                             } 
                         }/>
                 </div>
-                <div className={Style.login__create}>
-                    <Link className={Style.login__create_link} to="/create-user">Não tem usuário? cadastre-se agora!</Link>
-                </div>
-                <div className={Style.login__actions}>
+                <div className={Style.create__actions}>
                     <Button type="submit">Confirmar</Button>
                 </div>
             </form>

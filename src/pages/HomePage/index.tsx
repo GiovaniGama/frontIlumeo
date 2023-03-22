@@ -152,7 +152,7 @@ export function HomePage(){
           </div>
           <div className={Style.container__button}>
             <button onClick={() => handleLogout()} type={undefined}>
-              <span>Hora de saída</span>
+              <span>Sair</span>
             </button>
           </div>
         </div>

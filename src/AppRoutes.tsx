@@ -10,6 +10,7 @@ import { LoginPage } from "./pages/Login"
 import { HomePage } from "./pages/HomePage"
 import { AuthProvider, AuthContext } from "./contexts/auth"
 import { IProps } from "./interfaces/props.interface"
+import { CreateUser } from "./pages/Create-user"
 
 export function AppRoutes(){
 
@@ -36,6 +37,7 @@ export function AppRoutes(){
             <AuthProvider>
                 <Routes>
                     <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/create-user" element={<CreateUser/>}/>
                     <Route path="/" 
                     element={
                         <Private>

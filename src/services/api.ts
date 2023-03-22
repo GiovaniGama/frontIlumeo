@@ -15,3 +15,7 @@ export const getWorkSchedule = async() => {
 export const getUser = async() => {
     return http.get('/profile')
 }
+
+export const createUser = async(user_name: string, password: string) => {
+    return http.post('/user', { user_name, password })
+}
