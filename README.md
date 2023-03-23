@@ -1,6 +1,6 @@
 # Front ponto Ilumeu
 
-<a href="https://front-ilumeo.vercel.app/Login"> --> Acessar o front <-- </a>
+<a href="https://front-ilumeo.vercel.app/Login" target="_blank"> --> Acessar o front <-- </a>
 
 ## 🔖&nbsp; Sobre
 
