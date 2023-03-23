@@ -7,6 +7,7 @@ import { createWorkSchedule, getUser, getWorkSchedule } from "../../services/api
 import moment from "moment";
 import Style from "./style.module.scss"
 import Timer from "../../components/time";
+import { IUser } from "../../interfaces/user.interface";
 
 export function HomePage(){
     const { logout }: IProps | any = useContext(AuthContext)
@@ -73,7 +74,8 @@ export function HomePage(){
         logout();
     }
 
-    let now: any = new Date
+
+    const now = (new Date).toString()
 
     function handleSubmit(e: any){
       e.preventDefault()
@@ -88,6 +90,7 @@ export function HomePage(){
     
     const handlePauseResume = (e: any) => {
       setIsPaused(!isPaused);
+      debugger
       setcheckOut(e)
       window.location.reload();
     };
@@ -112,14 +115,14 @@ export function HomePage(){
               checkIn != '' ?
                 <div className={Style.container__button}>
                   <form onSubmit={handleSubmit}>
-                    <button value={now} onClick={(e: any) => handlePauseResume(e.target.value)} type={undefined}>
+                    <button value={now} onClick={(e: any) => handlePauseResume(e.target.value)}>
                       <span>Hora de saída</span>
                       </button>
                   </form>
                 </div>
                 :
                 <div className={Style.container__button}>
-                  <button value={now} onClick={(e: any) => handleStart(e.target.value)} type={undefined}>
+                  <button value={now} onClick={(e: any) => handleStart(e.target.value)}>
                     <span>
                       Hora de entrada
                     </span>
@@ -130,7 +133,7 @@ export function HomePage(){
           </div>
           <div className={Style.container__message}>
             {
-              !schedules ?
+              schedules?.length === 0 || schedules === undefined ?
               <div className={Style.container__message_p}>
                 <p>Não há pontos registrados</p>
               </div>
@@ -151,8 +154,10 @@ export function HomePage(){
             }
           </div>
           <div className={Style.container__button}>
-            <button onClick={() => handleLogout()} type={undefined}>
-              <span>Sair</span>
+            <button onClick={handleLogout}>
+              <span>
+                Sair
+              </span>
             </button>
           </div>
         </div>
