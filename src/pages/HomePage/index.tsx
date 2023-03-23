@@ -12,7 +12,6 @@ export function HomePage(){
     let now:any = new Date()
 
     const { logout }: IProps | any = useContext(AuthContext)
-    const [loading, setLoading] = useState(true)
     const [schedules, setSchedules] = useState<ISchedules[]>()
     const [checkIn, setCheckIn] = useState('')
     const [checkOut, setcheckOut] = useState('')
@@ -26,7 +25,6 @@ export function HomePage(){
            await getWorkSchedule()
            .then((res) => {
                 setSchedules(res.data)        
-                setLoading(false)
            })
            .catch((err) => {
                 console.error(err)
@@ -57,36 +55,37 @@ export function HomePage(){
     }, [isActive, isPaused])
 
 
-  function convertHour(hour: number){
-      const dateObj = new Date(hour * 1000);
-      const hours = dateObj.getUTCHours();
-      const minutes = dateObj.getUTCMinutes();
-      const seconds = dateObj.getSeconds();
-    
-        const timeString = hours.toString().padStart(2, '0') + ':' + 
-        minutes.toString().padStart(2, '0') + ':' + 
-        seconds.toString().padStart(2, '0');
+    function convertHour(hour: number){
+        const dateObj = new Date(hour * 1000);
+        const hours = dateObj.getUTCHours();
+        const minutes = dateObj.getUTCMinutes();
+        const seconds = dateObj.getSeconds();
+      
+          const timeString = hours.toString().padStart(2, '0') + ':' + 
+          minutes.toString().padStart(2, '0') + ':' + 
+          seconds.toString().padStart(2, '0');
 
-        return timeString
-  }
+          return timeString
+    }
 
   
     function handleLogout(){
         logout();
     }
   
-    function handleSubmit(e: any){
-      e.preventDefault()
-      createWorkSchedule(new Date(checkIn), new Date(checkOut))
+    async function handleSubmit($event: { preventDefault: () => void; }){
+      $event.preventDefault()
+      await createWorkSchedule(new Date(checkIn), new Date(checkOut))
+      window.location.reload()
     }
 
-    const handleStart = () => {
+    function handleStart(){
       setIsActive(true);
       setCheckIn(now)
       setIsPaused(false);
     };
     
-    const handlePauseResume = () => {
+    function handlePauseResume(){
       setIsPaused(!isPaused);
       setcheckOut(now)
     };
@@ -111,7 +110,7 @@ export function HomePage(){
               checkIn != '' ?
                 <div className={Style.container__button}>
                   <form onSubmit={handleSubmit}>
-                    <button onClick={() => handlePauseResume()}>
+                    <button onClick={() => handlePauseResume()} type="submit">
                       <span>Hora de saída</span>
                       </button>
                   </form>
