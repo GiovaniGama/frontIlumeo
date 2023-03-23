@@ -140,8 +140,7 @@ export function HomePage(){
           </div>
           <div className={Style.container__schedules}>
             {
-              schedules?.map((data) => (
-                
+              schedules?.sort((a, b) => (a.id_schedule < b.id_schedule)? 1:-1).map((data) => (
                 <div className={Style.container__result} key={data.id_schedule}>
                   <Card date={moment(data.date_check_in).format('DD/MM/yyyy')} time={convertHour(moment.duration(moment(data.date_check_out).diff(moment(data.date_check_in))).asSeconds())}/>
                 </div>
