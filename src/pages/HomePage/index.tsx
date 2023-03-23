@@ -90,7 +90,6 @@ export function HomePage(){
     
     const handlePauseResume = (e: any) => {
       setIsPaused(!isPaused);
-      debugger
       setcheckOut(e)
       window.location.reload();
     };
