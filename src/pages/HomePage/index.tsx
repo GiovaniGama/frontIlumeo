@@ -7,9 +7,10 @@ import { createWorkSchedule, getUser, getWorkSchedule } from "../../services/api
 import moment from "moment";
 import Style from "./style.module.scss"
 import Timer from "../../components/time";
-import { IUser } from "../../interfaces/user.interface";
 
 export function HomePage(){
+    let now:any = new Date()
+
     const { logout }: IProps | any = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
     const [schedules, setSchedules] = useState<ISchedules[]>()
@@ -73,24 +74,21 @@ export function HomePage(){
     function handleLogout(){
         logout();
     }
-
-
-    const now = (new Date).toString()
-
+  
     function handleSubmit(e: any){
       e.preventDefault()
-        createWorkSchedule(new Date(checkIn), new Date(checkOut))
+      createWorkSchedule(new Date(checkIn), new Date(checkOut))
     }
 
-    const handleStart = (e: any) => {
+    const handleStart = () => {
       setIsActive(true);
-      setCheckIn(e)
+      setCheckIn(now)
       setIsPaused(false);
     };
     
-    const handlePauseResume = (e: any) => {
+    const handlePauseResume = () => {
       setIsPaused(!isPaused);
-      setcheckOut(e)
+      setcheckOut(now)
       window.location.reload();
     };
 
@@ -114,14 +112,14 @@ export function HomePage(){
               checkIn != '' ?
                 <div className={Style.container__button}>
                   <form onSubmit={handleSubmit}>
-                    <button value={now} onClick={(e: any) => handlePauseResume(e.target.value)}>
+                    <button onClick={() => handlePauseResume()}>
                       <span>Hora de saída</span>
                       </button>
                   </form>
                 </div>
                 :
                 <div className={Style.container__button}>
-                  <button value={now} onClick={(e: any) => handleStart(e.target.value)}>
+                  <button  onClick={() => handleStart()}>
                     <span>
                       Hora de entrada
                     </span>
