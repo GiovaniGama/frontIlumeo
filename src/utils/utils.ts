@@ -1,5 +1,5 @@
 import axios from "axios";
-import { environment } from "../environments/environments";
+import { environment } from "../environments/environments.prod";
 
 const url_api = environment.apiURL
 
